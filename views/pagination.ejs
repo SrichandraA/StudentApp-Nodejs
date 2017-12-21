@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style type="text/css">
+        .pagination{
+            margin-left: 500px;
+        }
+        #myButton{
+             margin-left: 530px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="display-3">Student Application</h2>
+<br>
+      <% var t=0 %>
+
+            <% students.forEach( function( student ) { %>
+                <% t++ %>
+            <% }) %>
+            <% var last=Math.ceil(t/5) %>
+             <table class="table" id="mytable">
+  <thead class="thead-inverse">
+    <tr>
+      <th>Name</th>
+      <th>Section</th>
+      <th>Email</th>
+      <th colspan="2">Phone</th>
+
+<th >Edit</th>
+<th colspan="5">Delete</th>
+
+    </tr>
+  </thead>
+  <tbody>
+            <%
+                if(currentPage == 1){
+                for(var r=0; r<5;r++){ %>
+
+                <tr>
+    <form method="post">
+      
+    
+      <td><%= students[r].name %></td>
+      <td><%= students[r].section %></td>
+      <td><%= students[r].email %></td>
+        <td><%= students[r].phone %></td>
+          <td><input type="hidden" name="val" value=<%= students[r].name %> ></td>
+            <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/editpage">Edit</button></td>
+             <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/dell">Delete</button></td>
+             </form>
+    </tr>
+    
+                <% } %>
+
+
+               <% } %>
+                <%
+                if((currentPage > 1)&&(currentPage != last)){
+                for(var r=(currentPage-1)*5; r< currentPage*5;r++){ %>
+
+                <tr>
+    <form method="post">
+      
+    
+      <td><%= students[r].name %></td>
+      <td><%= students[r].section %></td>
+      <td><%= students[r].email %></td>
+        <td><%= students[r].phone %></td>
+          <td><input type="hidden" name="val" value=<%= students[r].name %> ></td>
+            <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/editpage">Edit</button></td>
+             <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/dell">Delete</button></td>
+             </form>
+    </tr>
+    
+                <% } %>
+
+
+               <% } %>
+                <%
+                if((currentPage == last)){
+                for(var r=(currentPage-1)*5; r< t;r++){ %>
+
+               <tr>
+    <form method="post">
+      
+    
+      <td><%= students[r].name %></td>
+      <td><%= students[r].section %></td>
+      <td><%= students[r].email %></td>
+        <td><%= students[r].phone %></td>
+          <td><input type="hidden" name="val" value=<%= students[r].name %> ></td>
+            <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/editpage">Edit</button></td>
+             <td ><button type="submit" class="btn btn-primary btn-sm" formaction="/dell">Delete</button></td>
+             </form>
+    </tr>
+    
+                <% } %>
+
+
+               <% } %>
+</tbody>
+</table>
+
+            
+            <% var pageCount=Math.ceil(t/5) %>
+       
+           <% if (pageCount > 1) { %>
+            <ul class="pagination">
+                <% if (currentPage > 1) { %>
+                    <li><a href="/pagination/<%= currentPage-1 %>">&laquo;</a></li>
+                <% } %>
+                <% var i = 1;
+                if (currentPage > 5) {
+                    i = +currentPage - 4;
+                } %>
+                <% if (i !== 1) { %>
+                    <li class="disabled"><a href="#">...</a></li>
+                <% } %>
+                <% for (i; i<=pageCount; i++) { %>
+                    <% if (currentPage == i) { %>
+                        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+                    <% } else { %>
+                        <li><a href="/pagination/<%= i %>"><%= i %></a></li>
+                    <% } %>
+                    <% if (i == (+currentPage + 4)) { %>
+                        <li class="disabled"><a href="#">...</a></li>
+                    <% break; } %>
+                <% } %>
+                <% if (currentPage != pageCount) { %>
+                    <li><a href="/pagination/<%= pageCount %>">&raquo;</a></li>
+                <% } %>
+            </ul>
+        <% } %>
+        <br>
+        <br>
+        <button onclick="location.href = '/register';" class="btn btn-primary btn-sm" id="myButton" class="submit-button" >Register</button>
+
+    </div>
+</body>
+</html>
