@@ -49,7 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
-
+/* testing url*/
 app.get('/first',function(req,res){
 
 con.query("select * from table1",function(err,result){
@@ -62,6 +62,8 @@ res.write("<html><body><p>'result'</p></body></html>");
 });
 
 });
+/* testing url*/
+
 app.get('/second',function(req,res){
 
 con.query("select * from table1",function(err,result){
@@ -73,6 +75,7 @@ res.send(result);
 });
 
 });
+/*first page of project url*/
 app.get('/pagination/:id',function(req,res){
 con.query("select * from table1",function(err,result){
 	if(err) throw err;
@@ -80,6 +83,8 @@ con.query("select * from table1",function(err,result){
 	res.render('pagination',{students:result,currentPage:page});
 });
 });
+/* testing url*/
+
 app.get('/third',function(req,res){
 
 con.query("select * from table1",function(err,result){
@@ -90,14 +95,19 @@ res.render('main',{users: result});
 });
 
 });
+/* testing url*/
 
 app.get('/page',function(req,res){
-  res.sendFile('/testingnode/routes/page.html');
+  res.sendFile('/t/testingnode/routes/page.html');
 });
+
+/* testing url*/
 
 app.get('/test',function(req,res){
   res.render('test');
 });
+/*pressing edit button url*/
+
 app.post('/editpage',urlencodedParser, function(req,res){
 
 console.log(req.body.val);
@@ -112,11 +122,14 @@ res.render('test',{users: result});
 });
 
 });
+/*registration button url*/
 app.get('/register',function(req,res){
   res.sendFile('/t/testingnode/routes/register.html');
 
 	
 });
+/* testing url*/
+
 app.post('/save',urlencodedParser, function(req,res){
   console.log(req.body.name);
   let newname=req.body.name;
@@ -131,7 +144,7 @@ res.render('main',{users: result});
 });
 });
 });
-
+/* save button url*/
 app.post('/save1',urlencodedParser, function(req,res){
 
   let post={name:req.body.name};
@@ -160,6 +173,7 @@ con.query("select * from table1",function(err,result){
   	});
 
 });
+/* deleting btn url*/
 
 app.post('/dell',urlencodedParser,function(req,res){
 
@@ -175,6 +189,8 @@ app.post('/dell',urlencodedParser,function(req,res){
 	});
 
 });
+/* updating url*/
+
 app.post('/update',urlencodedParser, function(req,res){
 
 	let post=[{section:req.body.section, email:req.body.email, phone:req.body.phone},{name:req.body.name}];
